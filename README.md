@@ -12,10 +12,17 @@ Building json,
 Parsing values from a json response from wherever,
 Encoding and Decoding whole classes to and from JSON
 
-Jackson does all this well, but at a cost. Some of these task can be a tad complex.
+Jackson does all this well, but at a cost. Some of these tasks can be a bit complex or repetitive.
 
 So SimplerJackson shamelessly marries the best of Jackson and the simplicity of org.json's syntax to get a quick, 
 yet easy to use library.
+
+We give you JSONObject and JSONArray for building json objects and arrays from the ground up and for parsing json strings.
+
+
+We give you a Converter class also to make json encoding and decoding of whole java classes as simple as a method call within that class.
+
+
 
 Here are simple examples:
 
