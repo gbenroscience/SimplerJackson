@@ -1,4 +1,4 @@
 .DS_Store
-../nbproject/
-../build/
-../manifest.mf
+nbproject
+build
+manifest.mf
