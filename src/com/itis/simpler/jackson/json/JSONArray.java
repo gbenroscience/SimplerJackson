@@ -187,6 +187,10 @@ public class JSONArray {
         return new JSONArray();
     }
       
+
+    public int length(){
+        return parseNode.size();
+    }
          @Override
     public String toString() {
         return parseNode.toString();
