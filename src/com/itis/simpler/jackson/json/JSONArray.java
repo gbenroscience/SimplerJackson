@@ -50,7 +50,7 @@ public class JSONArray {
         parseNode.add(val);
     }
 
-    public void pu(float val) {
+    public void put(float val) {
         parseNode.add(val);
     }
 
