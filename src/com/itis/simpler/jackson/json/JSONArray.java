@@ -18,20 +18,25 @@ import java.math.BigInteger;
  *
  * @author GBEMIRO JIBOYE <gbenroscience@gmail.com>
  */
+
+
+/**
+ *
+ * @author GBEMIRO JIBOYE <gbenroscience@gmail.com>
+ */
 public class JSONArray {
 
-   
-    protected ArrayNode parseNode; 
+    protected ArrayNode parseNode;
 
     public JSONArray() {
         this.parseNode = JsonNodeFactory.instance.arrayNode(); // initializing     
     }
 
-    public JSONArray(String json) throws JsonProcessingException{
+    public JSONArray(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        
-            this.parseNode = mapper.readValue(json, ArrayNode.class);
- 
+
+        this.parseNode = mapper.readValue(json, ArrayNode.class);
+
     }
 
     public void putByte(byte val) {
@@ -77,23 +82,32 @@ public class JSONArray {
     public void put(Object val) {
         parseNode.addPOJO(val);
     }
-    
-     public void put(int index, JSONArray value) {
-        parseNode.set(index, value.parseNode);
-    }
-     
-      public void put(int index, JSONObject value) {
-        parseNode.set(index, value.parseNode);
+
+    public void put(JSONObject val) {
+        parseNode.add(val.parseNode);
     }
     
-     public String optString(int index) {
+        public void put(JSONArray val) {
+        parseNode.add(val.parseNode);
+    }
+
+    public void put(int index, JSONArray value) {
+        parseNode.set(index, value.parseNode);
+    }
+
+    public void put(int index, JSONObject value) {
+        parseNode.set(index, value.parseNode);
+    }
+
+    public String optString(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
             return nod != null ? nod.asText("") : "";
         }
         return "";
     }
- public int optInt(int index) {
+
+    public int optInt(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
             return nod != null ? nod.asInt(0) : 0;
@@ -154,50 +168,51 @@ public class JSONArray {
     public JSONObject optJSONObject(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
-            
-            if(nod != null){
-                if(nod.isObject()){
-                        ObjectNode obn = (ObjectNode) nod;
-                          JSONObject obj = new JSONObject();
-                          obj.parseNode = obn;
-                          return obj;
-                   }
-                
+
+            if (nod != null) {
+                if (nod.isObject()) {
+                    ObjectNode obn = (ObjectNode) nod;
+                    JSONObject obj = new JSONObject();
+                    obj.parseNode = obn;
+                    return obj;
+                }
+
             }
 
         }
         return new JSONObject();
     }
-    
-      public JSONArray optJSONArray(int index) {
+
+    public JSONArray optJSONArray(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
-            
-            if(nod != null){
-                if(nod.isArray()){
-                        ArrayNode anode = (ArrayNode) nod;
-                          JSONArray obj = new JSONArray();
-                          obj.parseNode = anode;
-                          return obj;
-                   }
-                
+
+            if (nod != null) {
+                if (nod.isArray()) {
+                    ArrayNode anode = (ArrayNode) nod;
+                    JSONArray obj = new JSONArray();
+                    obj.parseNode = anode;
+                    return obj;
+                }
+
             }
 
         }
         return new JSONArray();
     }
-      
 
-    public int length(){
+    public int length() {
         return parseNode.size();
     }
-         @Override
+
+    @Override
     public String toString() {
         return parseNode.toString();
     }
-      public String toCuteString() {
+
+    public String toCuteString() {
         return parseNode.toPrettyString();
     }
-    
 
 }
+
