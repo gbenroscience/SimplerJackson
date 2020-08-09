@@ -41,44 +41,45 @@ public class JSONObject {
         }
     }
 
+    
     public void put(String key, String value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, boolean value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, int value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, short value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, float value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, long value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, double value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, byte[] value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, BigInteger value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, BigDecimal value) {
-        parseNode.put("key", value); // building
+        parseNode.put(key, value); // building
     }
 
     public void put(String key, Object[] value) {
