@@ -271,7 +271,13 @@ public class JSONObject {
         }
         return "";
     }
-
+    public String optString(String key , String def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(key);
+            return parseNode != null && nod.isTextual() ? nod.asText(def) : def;
+        }
+        return def;
+    }
     public boolean has(String key) {
         if (parseNode != null) {
             return parseNode.has(key);
