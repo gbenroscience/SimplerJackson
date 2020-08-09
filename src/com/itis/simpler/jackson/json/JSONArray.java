@@ -14,11 +14,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.math.BigDecimal;
 import java.math.BigInteger; 
 
-/**
- *
- * @author GBEMIRO JIBOYE <gbenroscience@gmail.com>
- */
-
 
 /**
  *
@@ -86,8 +81,8 @@ public class JSONArray {
     public void put(JSONObject val) {
         parseNode.add(val.parseNode);
     }
-    
-        public void put(JSONArray val) {
+
+    public void put(JSONArray val) {
         parseNode.add(val.parseNode);
     }
 
@@ -106,6 +101,14 @@ public class JSONArray {
         }
         return "";
     }
+       public String optString(int index, String def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return parseNode != null && nod.isTextual() ? nod.asText(def) : def;
+        }
+        return def;
+    }
+
 
     public int optInt(int index) {
         if (parseNode != null) {
@@ -113,6 +116,14 @@ public class JSONArray {
             return nod != null ? nod.asInt(0) : 0;
         }
         return 0;
+    }
+
+    public int optInt(int index, int def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return nod != null ? nod.asInt(def) : def;
+        }
+        return def;
     }
 
     public long optLong(int index) {
@@ -123,12 +134,28 @@ public class JSONArray {
         return 0;
     }
 
+    public long optLong(int index, long def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return nod != null ? nod.asLong(def) : def;
+        }
+        return def;
+    }
+
     public double optDouble(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
             return nod != null ? nod.asDouble(0) : 0;
         }
         return 0;
+    }
+
+    public double optDouble(int index, double def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return nod != null ? nod.asDouble(def) : def;
+        }
+        return def;
     }
 
     public boolean optBoolean(int index) {
@@ -139,12 +166,28 @@ public class JSONArray {
         return false;
     }
 
+    public boolean optBoolean(int index, boolean def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return nod != null ? nod.asBoolean(def) : def;
+        }
+        return def;
+    }
+
     public double optFloat(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
             return nod != null && nod.isFloat() ? nod.floatValue() : 0;
         }
         return 0;
+    }
+
+    public double optFloat(int index, float def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return nod != null && nod.isFloat() ? nod.floatValue() : def;
+        }
+        return def;
     }
 
     public short optShort(int index) {
@@ -155,14 +198,50 @@ public class JSONArray {
         return 0;
     }
 
-    public byte optByte(int index) {
+    public short optShort(int index, short def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+            return nod != null && nod.isShort() ? nod.shortValue() : def;
+        }
+        return def;
+    }
+
+
+    
+     public byte optByte(int index) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
 
-            return nod != null && nod.isShort() ? (byte) nod.asInt(0) : 0;
+            if (nod != null && nod.isShort()) {
+
+                short val = (short) nod.asInt();
+                if (val >= -128 && val <= 127) {
+                    return (byte) val;
+                }
+
+            }
+            return 0;
 
         }
         return 0;
+    }
+
+    public byte optByte(int index, byte def) {
+        if (parseNode != null) {
+            JsonNode nod = parseNode.get(index);
+
+            if (nod != null && nod.isShort()) {
+
+                short val = (short) nod.asInt(def);
+                if (val >= -128 && val <= 127) {
+                    return (byte) val;
+                }
+
+            }
+            return def;
+
+        }
+        return def;
     }
 
     public JSONObject optJSONObject(int index) {
@@ -215,4 +294,5 @@ public class JSONArray {
     }
 
 }
+
 
