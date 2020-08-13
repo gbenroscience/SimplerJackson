@@ -34,11 +34,9 @@ public class JSONObject {
     public JSONObject(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-
             this.parseNode = mapper.readValue(json, ObjectNode.class);
-
         } catch (JsonProcessingException ex) {
-            Logger.getLogger(JSONObject.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
     }
 
