@@ -17,6 +17,7 @@ import java.math.BigInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author GBEMIRO JIBOYE <gbenroscience@gmail.com>
@@ -386,6 +387,7 @@ public class JSONArray {
         return parseNode.size();
     }
 
+
     @Override
     public String toString() {
         return parseNode.toString();
@@ -396,3 +398,5 @@ public class JSONArray {
     }
 
 }
+
+
