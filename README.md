@@ -24,6 +24,7 @@ We give you a Converter class also to make json encoding and decoding of whole j
 
 
 
+
 Here are simple examples:
 
 ```java
@@ -166,3 +167,83 @@ Here are simple examples:
 
     }
 ```
+
+## Validating JSON structure against a standard schema
+As of Sat-15-Aug 2020, we have added methods to allow Java API developers validate incoming json strings against standard Json schema defined as Java classes.
+
+
+If say your standard json structure is:
+
+```json
+{
+  "user":{
+     "fname" : "Sam",
+     "lname" : "Lane",
+     "age" : 18,
+     "height" : 1.92,
+
+     "location" : {
+         "lat" : 3.465,
+         "lng" : 4.253
+     }
+     "creds" : {
+         "password" : "amiol34xwr",
+         "security_question" : "what is the name of your favorite world city?",
+         "security_answer" : "lagos"
+     }
+  }
+}
+```
+
+A general template to model this would be a Java class, say:
+
+
+```java
+
+public class User{
+
+static class Location{
+
+private double lat;
+private double lng;
+
+}
+
+
+static class Creds{
+
+private double password;
+private String security_question;
+private String security_answer;
+
+}
+
+private Creds creds;
+private Location location;
+private String fname;
+private String lname;
+private int age;
+private double height;
+
+}
+```
+
+Make sure that your Java class contains the necessary json fields that you wish to validate any incoming json request against.
+The validator ignores static fields in the Java class and uses the object fields alone.
+If the incoming json has a field that is not present in the proper arrangement according to the schema dictated by the java class,
+it fails the validation.
+Also, if the general data type of the json field's value is not same as specified in the Java class being used as the json schema,
+it fails the validation also.
+
+You may run the json validator in LENIENT or STRICT mode.
+
+In STRICT mode, all fields present in the incoming json must be present in the target schema(Java class) and all fields present in the target schema must
+also be present in the incoming json.
+
+In LENIENT mode, all fields present in the incoming json must be present in the target schema, but not otherwise.
+Also in LENIENT mode, the value of fields in JSONArrays and JSONobjects may be null, not so in STRICT mode.
+
+
+
+
+
