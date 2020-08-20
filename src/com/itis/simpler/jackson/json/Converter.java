@@ -29,7 +29,7 @@ public class Converter<T> {
         return getObjectReader().readValue(json);
     }
 
-    public T fromJsonString(JSONObject json, Class clazz) throws IOException {
+    public T fromJsonObject(JSONObject json, Class clazz) throws IOException {
         if (json == null) {
             return null;
         }
