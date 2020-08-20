@@ -29,6 +29,14 @@ public class Converter<T> {
         return getObjectReader().readValue(json);
     }
 
+    public T fromJsonString(JsonNode json, Class clazz) throws IOException {
+        if (json == null || json.isEmpty()) {
+            return null;
+        }
+        this.clazz = clazz;
+        return getObjectReader().readValue(json);
+    }
+  
     public String toJsonString(T obj) throws JsonProcessingException {
         this.clazz = obj.getClass();
         return getObjectWriter().writeValueAsString(obj);
