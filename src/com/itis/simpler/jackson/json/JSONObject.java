@@ -5,13 +5,11 @@
  */
 package com.itis.simpler.jackson.json;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -26,10 +24,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  *
@@ -279,7 +275,7 @@ public class JSONObject {
     public String optString(String key) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(key);
-            return parseNode != null && nod.isTextual() ? nod.asText("") : "";
+            return nod != null && nod.isTextual() ? nod.asText("") : "";
         }
         return "";
     }
@@ -287,7 +283,7 @@ public class JSONObject {
     public String optString(String key, String def) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(key);
-            return parseNode != null && nod.isTextual() ? nod.asText(def) : def;
+            return nod != null && nod.isTextual() ? nod.asText(def) : def;
         }
         return def;
     }
@@ -534,11 +530,11 @@ public class JSONObject {
 
     @Override
     public String toString() {
-        return parseNode.toString();
+         return parseNode != null ? parseNode.toString(): null;
     }
 
     public String toCuteString() {
-        return parseNode.toPrettyString();
+        return parseNode != null ? parseNode.toPrettyString() : null;
     }
 
 }
