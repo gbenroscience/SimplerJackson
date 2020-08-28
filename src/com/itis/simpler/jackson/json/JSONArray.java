@@ -14,9 +14,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.POJONode;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -120,7 +117,7 @@ public class JSONArray {
     public String optString(int index, String def) {
         if (parseNode != null) {
             JsonNode nod = parseNode.get(index);
-            return parseNode != null && nod.isTextual() ? nod.asText(def) : def;
+            return nod != null && nod.isTextual() ? nod.asText(def) : def;
         }
         return def;
     }
@@ -351,6 +348,7 @@ public class JSONArray {
                         try {
                             JSONObject cob = new JSONObject(nod.toString());
                             
+                     
                             kidReporter = cob.validateAgainstClass(arrayType, reportingMode);
                         } catch (JsonProcessingException ex) {
                            return new ErrorReporting(false, null, "Couldn't parse json input successfully.");
@@ -387,14 +385,13 @@ public class JSONArray {
         return parseNode.size();
     }
 
-
     @Override
     public String toString() {
-        return parseNode.toString();
+        return parseNode != null ? parseNode.toString() : null;
     }
 
     public String toCuteString() {
-        return parseNode.toPrettyString();
+        return parseNode != null ? parseNode.toPrettyString() : null;
     }
 
 }
